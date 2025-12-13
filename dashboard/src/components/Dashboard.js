@@ -10,9 +10,10 @@ import { Route, Routes } from "react-router-dom";
 
 function Dashboard() {
   return (
-    <div>
+    <div className='dashboard-container'>
       <WatchList/>
-      <Routes>
+      <div className="content">
+        <Routes>
         <Route path='/' element={<Summary/>}/>
         <Route path='/orders' element={<Orders/>}/>
         <Route path='/holdings' element={<Holdings/>}/>
@@ -20,6 +21,7 @@ function Dashboard() {
         <Route path='/funds' element={<Funds/>}/>
         <Route path='/apps' element={<Apps/>}/>
       </Routes>
+      </div>
     </div>
   )
 }
