@@ -1,6 +1,10 @@
 import React from "react";
 
 function OpenAccount() {
+
+  const handleLogin = () => {
+    window.location.href = "http://localhost:3000/";
+  }
   return (
     <div className="container p-5 mb-5">
       <div className="row text-center">
@@ -12,6 +16,7 @@ function OpenAccount() {
         <button
           className="p-2 btn btn-primary fs-5 mb-5"
           style={{ width: "20%", margin: "0 auto" }}
+          onClick={handleLogin}
         >
           Sign up Now
         </button>

@@ -1,16 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from "axios";
+import { useCookies } from 'react-cookie';
 
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
-  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  // const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [cookies, removeCookie] = useCookies([]);
+  const [userData, setUserData] = useState({});
+  const username = userData.user || 'USER';
 
   const handleClick = (index) => {
     setSelectedMenu(index);
   }
 
-  const handleProfileClick = (index) => {
-    setIsProfileDropdownOpen(!isProfileDropdownOpen);
+  const fetchData = async () => {
+    const { data } = await axios.post(
+      "http://localhost:4000", {}, { withCredentials: true }
+    );
+    return data;
+  }
+  useEffect(() => {
+    fetchData().then(data => setUserData(data));
+
+  }, []);
+
+  const handleProfileClick = async () => {
+    if (userData.status) {
+      removeCookie("token");
+      console.log(cookies);
+      window.location.href = "http://localhost:3000/login";
+    }
   }
 
   const menuClass = "menu";
@@ -70,11 +90,10 @@ const Menu = () => {
           </li>
         </ul>
         <hr />
-        <div className="profile" onClick={handleProfileClick}>
-          <div className="avatar">ZU</div>
-          <p className="username">USERID</p>
-        </div>
-
+        <abbr title="Click to Logout" style={{textDecoration: "none"}} className="profile" onClick={handleProfileClick}>
+            <div className="avatar">{username[0]?.toUpperCase()}</div>
+            <p className="username">{username.toUpperCase()}</p>
+        </abbr>
       </div>
     </div>
   )

@@ -4,6 +4,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const authRoute = require("./Routes/AuthRoute");
 
 const { HoldingModel } = require("./model/HoldingsModel")
 const { PositionModel } = require("./model/PositionsModel")
@@ -13,9 +15,18 @@ const URI = process.env.MONGO_URL;
 
 const app = express();
 
-app.use(cors());
 app.use(bodyParser.json());
 
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+app.use(cookieParser());
+app.use(express.json());
+app.use("/", authRoute);
 
 // app.get("/addholding", async (req, res) => {
 //     let HoldData = [
