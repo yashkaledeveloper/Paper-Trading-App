@@ -147,6 +147,12 @@ app.get("/allpositions", async (req, res) => {
   res.json(data);
 })
 
+app.get("/buystockdata/:id", async (req, res) => {
+  let { id } = req.params;
+  let data = await WatchListModel.findById(id);
+  res.json(data)
+})
+
 app.get("/allwatchlist", async (req, res) => {
   let data = await WatchListModel.find({});
   res.json(data);
