@@ -1,6 +1,6 @@
 const { model } = require("mongoose");
 
-const { WatchListSchema } = require("../Schema/WatchListSchema");
+const { WatchListSchema } = require("../schema/WatchListSchema");
 
 const WatchListModel = new model("watchlist", WatchListSchema);
 
