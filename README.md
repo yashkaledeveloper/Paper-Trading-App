@@ -44,18 +44,16 @@ Users can place buy/sell orders, manage holdings, track positions, and view P&L 
 ## 🛠 Tech Stack
 
 ### Frontend
-
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge\&logo=react\&logoColor=61DAFB)
-![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge\&logo=javascript)
-![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge\&logo=chartdotjs\&logoColor=white)
-![Axios](https://img.shields.io/badge/Axios-671DDF?style=for-the-badge)
+  - React Js
+  - Matrial UI
+  - Javascript
+  - Axios
 
 ### Backend
 
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge\&logo=nodedotjs\&logoColor=white)
-![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge\&logo=mongodb\&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge\&logo=jsonwebtokens)
+  - Node Js
+  - Express Js
+  - MongoDB
 
 ---
 

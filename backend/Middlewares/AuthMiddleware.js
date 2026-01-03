@@ -1,4 +1,4 @@
-const User = require("../model/UserModel");
+const { UserModel } = require("../model/UserModel");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
@@ -11,7 +11,7 @@ module.exports.userVerification = (req, res) => {
     if (err) {
      return res.json({ status: false })
     } else {
-      const user = await User.findById(data.id)
+      const user = await UserModel.findById(data.id)
       if (user) return res.json({ status: true, user: user.username })
       else return res.json({ status: false })
     }

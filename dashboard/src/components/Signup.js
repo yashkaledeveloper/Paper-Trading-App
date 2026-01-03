@@ -59,37 +59,36 @@ const Signup = () => {
   };
 
   return (
-    <div className="form_container">
+    <div className="form">
+      <div className="form_container">
       <h2>Signup Account</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="email">Email</label>
           <input
             type="email"
             name="email"
             value={email}
-            placeholder="Enter your email"
+            placeholder="jhon@gmail.com"
             onChange={handleOnChange}
           />
         </div>
         <div>
-          <label htmlFor="email">Username</label>
           <input
             type="text"
             name="username"
             value={username}
-            placeholder="Enter your username"
+            placeholder="jhondoe"
             onChange={handleOnChange}
           />
         </div>
         <div>
-          <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"
             value={password}
-            placeholder="Enter your password"
+            placeholder="xxxxxxxx"
             onChange={handleOnChange}
+            minLength={8}
           />
         </div>
         <button type="submit">Submit</button>
@@ -98,6 +97,7 @@ const Signup = () => {
         </span>
       </form>
       <ToastContainer />
+    </div>
     </div>
   );
 };

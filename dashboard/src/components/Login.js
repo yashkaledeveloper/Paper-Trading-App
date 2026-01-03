@@ -40,9 +40,10 @@ const Login = () => {
       const { success, message } = data;
       if (success) {
         handleSuccess(message);
-        setTimeout(() => {
-          navigate('/');
-        }, 1000);
+        navigate("/")
+        // setTimeout(() => {
+        //   window.location.href = "/"
+        // }, 1000);
       } else {
         handleError(message);
       }
@@ -57,27 +58,29 @@ const Login = () => {
   };
 
   return (
-    <div className="form_container">
-      <h2>Login Account</h2>
+    <div className="form">
+      <div className="form_container">
+      <h2>Login Now!</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="email">Email</label>
           <input
             type="email"
             name="email"
             value={email}
-            placeholder="Enter your email"
+            placeholder="jhon@gmail.com"
+            required
             onChange={handleOnChange}
           />
         </div>
         <div>
-          <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"
             value={password}
-            placeholder="Enter your password"
+            placeholder="xxxxxxxx"
+            required
             onChange={handleOnChange}
+            minLength={8}
           />
         </div>
         <button type="submit">Submit</button>
@@ -86,6 +89,7 @@ const Login = () => {
         </span>
       </form>
       <ToastContainer />
+    </div>
     </div>
   );
 };
