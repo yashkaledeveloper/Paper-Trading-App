@@ -6,10 +6,12 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const authRoute = require("./Routes/AuthRoute");
+const allRoute = require("./Routes/AllRoute");
 
 const { HoldingModel } = require("./model/HoldingsModel")
 const { PositionModel } = require("./model/PositionsModel")
-const { WatchListModel } = require("./model/WatchListModel")
+const { WatchListModel } = require("./model/WatchListModel");
+const { UserModel } = require("./model/UserModel");
 
 const PORT = process.env.PORT || 4000;
 const URI = process.env.MONGO_URL;
@@ -28,6 +30,7 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use("/", authRoute);
+app.use("/order", allRoute);
 
 // app.get("/addholding", async (req, res) => {
 //   let WatchListData = [
@@ -139,6 +142,16 @@ app.use("/", authRoute);
 
 app.get("/allholdings", async (req, res) => {
   let data = await HoldingModel.find({});
+  res.json(data);
+})
+
+app.get("/allusers", async (req, res) => {
+  let data = await UserModel.find({});
+  res.json(data);
+})
+
+app.get("/wallet", async (req, res) => {
+  let data = await WalletModel.find({});
   res.json(data);
 })
 

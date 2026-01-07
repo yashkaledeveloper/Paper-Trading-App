@@ -1,28 +1,53 @@
 const { UserModel } = require("../model/UserModel");
 const { createSecretToken } = require("../util/SecretToken");
 const bcrypt = require("bcryptjs");
+const { WalletModel } = require("../model/WalletModel");
 
-module.exports.Signup = async (req, res, next) => {
+module.exports.Signup = async (req, res) => {
+  // res.json({ message: "Signup working" });
   try {
-    const { email, password, username, createdAt } = req.body;
+    const { email, password, username } = req.body;
+
+    // 1. Check existing user
     const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
-      return res.json({ message: "User already exists" });
+      return res.status(400).json({ message: "User already exists" });
     }
-    const user = await UserModel.create({ email, password, username, createdAt });
-    const token = createSecretToken(user._id);
-    res.cookie("token", token, {
-      withCredentials: true,
-      httpOnly: false,
+
+    // 2. Create user
+    const user = await UserModel.create({
+      email,
+      password,
+      username,
     });
-    res
-      .status(201)
-      .json({ message: "User signed in successfully", success: true, user });
-    next();
+
+    // 3. Create wallet IMMEDIATELY after user creation
+    await WalletModel.create({
+      userId: user._id,
+      // balance will default to 100000
+    });
+
+    // 4. Generate token
+    const token = createSecretToken(user._id);
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "strict",
+    });
+
+    // 5. Send response
+    res.status(201).json({
+      message: "User signed up successfully",
+      success: true,
+      user,
+    });
+
   } catch (error) {
     console.error(error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
+
 
 module.exports.Login = async (req, res, next) => {
   try {
