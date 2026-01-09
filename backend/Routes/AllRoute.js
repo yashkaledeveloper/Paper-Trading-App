@@ -5,13 +5,24 @@ const {
   creditWallet,
   debitWallet,
 } = require("../Controllers/WalletController");
+const {
+  buyStock,
+  sellStock,
+  getUserOrders,
+} = require("../Controllers/OrdersController");
 const { userVerification } = require("../Middlewares/AuthMiddleware");
 const router = require("express").Router();
 
-router.post("/buy", userVerification, BuyStock);
-
 // router.post("/balance", userVerification, createBalance);
 
+// orders
+router.post("/buy", userVerification, buyStock);
+router.post("/sell", userVerification, sellStock);
+router.get("/getorders", userVerification, getUserOrders);
+
+
+
+// wallet
 router.get("/getwallet", userVerification, getWallet);
 // optional utility routes (testing / admin / demo)
 router.post("/credit", userVerification, creditWallet);

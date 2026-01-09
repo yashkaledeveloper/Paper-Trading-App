@@ -1,12 +1,35 @@
-const { Schema } = require("mongoose");
+// models/Holding.js
+const mongoose = require("mongoose");
 
-const HoldingSchema = new Schema({
-    name: String,
-    qty: Number,
-    avg: Number,
-    price: Number,
-    net: String,
-    day: String,
-})
+const holdingSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
 
-module.exports = { HoldingSchema }
+    stockSymbol: {
+      type: String,
+      required: true,
+      uppercase: true,
+    },
+
+    quantity: {
+      type: Number,
+      required: true,
+      min: 1,
+    },
+
+    avgBuyPrice: {
+      type: Number,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
+
+// ensure one holding per user per stock
+holdingSchema.index({ userId: 1, stockSymbol: 1 }, { unique: true });
+
+module.exports = mongoose.model("Holding", holdingSchema);
