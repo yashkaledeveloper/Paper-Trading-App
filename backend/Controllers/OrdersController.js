@@ -1,7 +1,7 @@
 // controllers/orderController.js
-const Order = require("../models/Order.js")
-const Wallet = require("../models/Wallet.js")
-const Holding = require("../models/Holding.js");
+const { OrdersModel } = require("../model/OrdersModel.js")
+const { WalletModel } = require("../model/WalletModel.js")
+const { HoldingModel } = require("../model/HoldingsModel.js");
 
 exports.buyStock = async (req, res) => {
   try {
@@ -9,7 +9,8 @@ exports.buyStock = async (req, res) => {
     const userId = req.user.id;
 
     // 1. Wallet check
-    const wallet = await Wallet.findOne({ userId });
+    const wallet = await WalletModel.findOne({userId});
+    
     const totalCost = quantity * price;
 
     if (wallet.balance < totalCost) {
@@ -17,7 +18,7 @@ exports.buyStock = async (req, res) => {
     }
 
     // 2. Create order
-    const order = await Order.create({
+    const order = await OrdersModel.create({
       userId,
       stockSymbol,
       type: "BUY",
@@ -31,7 +32,7 @@ exports.buyStock = async (req, res) => {
     await wallet.save();
 
     // 4. Holdings update
-    let holding = await Holding.findOne({ userId, stockSymbol });
+    let holding = await HoldingModel.findOne({ userId, stockSymbol });
 
     if (holding) {
       const newQty = holding.quantity + quantity;
@@ -40,7 +41,7 @@ exports.buyStock = async (req, res) => {
       holding.avgBuyPrice = newAvg;
       await holding.save();
     } else {
-      await Holding.create({
+      await HoldingModel.create({
         userId,
         stockSymbol,
         quantity,
@@ -64,14 +65,14 @@ exports.sellStock = async (req, res) => {
     const userId = req.user.id;
 
     // 1. Holding check
-    const holding = await Holding.findOne({ userId, stockSymbol });
+    const holding = await HoldingModel.findOne({ userId, stockSymbol });
 
     if (!holding || holding.quantity < quantity) {
       return res.status(400).json({ message: "Not enough stock to sell" });
     }
 
     // 2. Create order
-    const order = await Order.create({
+    const order = await OrdersModel.create({
       userId,
       stockSymbol,
       type: "SELL",
@@ -81,7 +82,7 @@ exports.sellStock = async (req, res) => {
     });
 
     // 3. Wallet update
-    const wallet = await Wallet.findOne({ userId });
+    const wallet = await WalletModel.findOne({ userId });
     wallet.balance += quantity * price;
     await wallet.save();
 
@@ -106,7 +107,7 @@ exports.sellStock = async (req, res) => {
 
 exports.getUserOrders = async (req, res) => {
   try {
-    const orders = await Order.find({ userId: req.user.id })
+    const orders = await OrdersModel.find({ userId: req.user.id })
       .sort({ createdAt: -1 });
 
     res.status(200).json(orders);

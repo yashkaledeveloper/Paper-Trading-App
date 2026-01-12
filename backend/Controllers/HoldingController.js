@@ -1,9 +1,9 @@
 // controllers/holdingController.js
-const Holding = require("../models/Holding");
+const { HoldingModel } = require("../model/HoldingsModel");
 
 exports.getHoldings = async (req, res) => {
   try {
-    const holdings = await Holding.find({ userId: req.user.id });
+    const holdings = await HoldingModel.find({ userId: req.user.id });
 
     res.status(200).json(holdings);
   } catch (err) {
@@ -11,13 +11,9 @@ exports.getHoldings = async (req, res) => {
   }
 };
 
-exports.updateHoldingOnBuy = async (
-  userId,
-  stockSymbol,
-  quantity,
-  price
-) => {
-  let holding = await Holding.findOne({ userId, stockSymbol });
+exports.updateHoldingOnBuy = async ( userId, stockSymbol, quantity, price ) => {
+
+  let holding = await HoldingModel.findOne({ userId, stockSymbol });
 
   if (holding) {
     const totalQty = holding.quantity + quantity;
@@ -31,8 +27,9 @@ exports.updateHoldingOnBuy = async (
     holding.avgBuyPrice = newAvg;
 
     await holding.save();
+    
   } else {
-    await Holding.create({
+    await HoldingModel.create({
       userId,
       stockSymbol,
       quantity,
@@ -47,7 +44,7 @@ exports.updateHoldingOnSell = async (
   stockSymbol,
   quantity
 ) => {
-  const holding = await Holding.findOne({ userId, stockSymbol });
+  const holding = await HoldingModel.findOne({ userId, stockSymbol });
 
   if (!holding || holding.quantity < quantity) {
     throw new Error("Not enough stock to sell");

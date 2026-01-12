@@ -1,7 +1,12 @@
-const { model } = require("mongoose");
+const mongoose = require("mongoose");
 
-const { WatchListSchema } = require("../schema/WatchListSchema");
+const watchListSchema = new mongoose.Schema({
+    name: String,
+    price: Number,
+    percent: String,
+    isDown: Boolean,
+})
 
-const WatchListModel = new model("watchlist", WatchListSchema);
+const WatchListModel = new mongoose.model("watchlist", watchListSchema);
 
 module.exports = { WatchListModel };

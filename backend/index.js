@@ -9,7 +9,6 @@ const authRoute = require("./Routes/AuthRoute");
 const allRoute = require("./Routes/AllRoute");
 
 const { HoldingModel } = require("./model/HoldingsModel")
-const { PositionModel } = require("./model/PositionsModel")
 const { WatchListModel } = require("./model/WatchListModel");
 const { UserModel } = require("./model/UserModel");
 
@@ -30,7 +29,7 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use("/", authRoute);
-app.use("/order", allRoute);
+app.use("/api", allRoute);
 
 // app.get("/addholding", async (req, res) => {
 //   let WatchListData = [
@@ -145,26 +144,21 @@ app.get("/allholdings", async (req, res) => {
   res.json(data);
 })
 
-app.get("/allusers", async (req, res) => {
-  let data = await UserModel.find({});
-  res.json(data);
-})
+// app.get("/allusers", async (req, res) => {
+//   let data = await UserModel.find({});
+//   res.json(data);
+// })
 
-app.get("/wallet", async (req, res) => {
-  let data = await WalletModel.find({});
-  res.json(data);
-})
+// app.get("/wallet", async (req, res) => {
+//   let data = await WalletModel.find({});
+//   res.json(data);
+// })
 
-app.get("/allpositions", async (req, res) => {
-  let data = await PositionModel.find({});
-  res.json(data);
-})
-
-app.get("/buystockdata/:id", async (req, res) => {
-  let { id } = req.params;
-  let data = await WatchListModel.findById(id);
-  res.json(data)
-})
+// app.get("/buystockdata/:id", async (req, res) => {
+//   let { id } = req.params;
+//   let data = await WatchListModel.findById(id);
+//   res.json(data)
+// })
 
 app.get("/allwatchlist", async (req, res) => {
   let data = await WatchListModel.find({});
