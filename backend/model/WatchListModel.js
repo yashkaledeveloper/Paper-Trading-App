@@ -1,12 +1,26 @@
+// models/Watchlist.js
 const mongoose = require("mongoose");
 
-const watchListSchema = new mongoose.Schema({
-    name: String,
-    price: Number,
-    percent: String,
-    isDown: Boolean,
-})
+const watchlistSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
 
-const WatchListModel = new mongoose.model("watchlist", watchListSchema);
+    stockSymbol: {
+      type: String,
+      required: true,
+      uppercase: true,
+    },
+  },
+  { timestamps: true }
+);
 
-module.exports = { WatchListModel };
+// One user cannot add same stock twice
+watchlistSchema.index({ userId: 1, stockSymbol: 1 }, { unique: true });
+
+const WatchListModel = mongoose.model("Watchlist", watchlistSchema);
+
+module.exports = { WatchListModel }

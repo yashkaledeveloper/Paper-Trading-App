@@ -1,5 +1,6 @@
 const { getWallet } = require("../Controllers/WalletController");
 const { buyStock, sellStock, getUserOrders } = require("../Controllers/OrdersController");
+const { getWatchlist, addToWatchlist, removeFromWatchlist } = require("../Controllers/WatchListController");
 const { getHoldings } = require("../Controllers/HoldingController")
 
 const { userVerification } = require("../Middlewares/AuthMiddleware");
@@ -8,6 +9,11 @@ const router = require("express").Router();
 
 // allholdings
 router.get("/allhodings", userVerification, getHoldings);
+
+// watchlist
+router.get("/getwatchlist", userVerification, getWatchlist);
+router.post("/addwatchlist", userVerification, addToWatchlist);
+router.delete("/delwatchlist:stockSymbol", userVerification, removeFromWatchlist);
 
 // orders
 router.post("/buy", userVerification, buyStock);
