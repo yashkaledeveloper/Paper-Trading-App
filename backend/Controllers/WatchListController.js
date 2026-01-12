@@ -1,9 +1,8 @@
-// controllers/watchlistController.js
-const Watchlist = require("../model/WatchListModel");
+const { WatchListModel } = require("../model/WatchListModel");
 
 exports.getWatchlist = async (req, res) => {
   try {
-    const list = await Watchlist.find({ userId: req.user.id });
+    const list = await WatchListModel.find({ userId: req.user.id });
 
     res.status(200).json(list);
   } catch (err) {
@@ -14,32 +13,40 @@ exports.getWatchlist = async (req, res) => {
 exports.addToWatchlist = async (req, res) => {
   try {
     const { stockSymbol } = req.body;
+    const user = req.user.id;
 
-    const item = await Watchlist.create({
-      userId: req.user.id,
+    const stockExist = await WatchListModel.findOne({
+      userId: user,
       stockSymbol,
     });
 
-    res.status(201).json({
+    if (stockExist) {
+      return res.status(409).json({
+        message: "Stock already exists in watchlist",
+      });
+    }
+
+    const item = await WatchListModel.create({
+      userId: user,
+      stockSymbol,
+    });
+
+    return res.status(201).json({
       message: "Stock added to watchlist",
       item,
     });
   } catch (err) {
-    if (err.code === 11000) {
-      return res
-        .status(400)
-        .json({ message: "Stock already in watchlist" });
-    }
-
-    res.status(500).json({ error: err.message });
+    console.error(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
+
 
 exports.removeFromWatchlist = async (req, res) => {
   try {
     const { stockSymbol } = req.params;
 
-    await Watchlist.findOneAndDelete({
+    await WatchListModel.findOneAndDelete({
       userId: req.user.id,
       stockSymbol,
     });
