@@ -7,6 +7,9 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const authRoute = require("./Routes/AuthRoute");
 const allRoute = require("./Routes/AllRoute");
+const { WatchListModel } = require("./model/WatchListModel");
+const { StockModel } = require("./model/StockModel");
+const startPriceEngine = require("./engine/mockPriceGenerator")
 
 const PORT = process.env.PORT || 4000;
 const URI = process.env.MONGO_URL;
@@ -22,10 +25,18 @@ app.use(
     credentials: true,
   })
 );
+
+startPriceEngine();
+
 app.use(cookieParser());
 app.use(express.json());
 app.use("/", authRoute);
 app.use("/api", allRoute);
+
+app.get("/allstocks", async (req, res) => {
+  let data = await StockModel.find({});
+  res.json(data)
+})
 
 app.listen(PORT, (req, res) => {
   console.log("App Started!")

@@ -28,10 +28,18 @@ const stockSchema = new mongoose.Schema(
       default: "General",
     },
 
+    lastPrice: { type: Number, default: 100 },
+    dayHigh: Number,
+    dayLow: Number,
+    change: Number,
+    changePercent: Number,
+
+
     isActive: {
       type: Boolean,
       default: true,
     },
+
   },
   { timestamps: true }
 );

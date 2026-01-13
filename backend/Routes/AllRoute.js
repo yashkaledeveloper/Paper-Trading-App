@@ -7,7 +7,7 @@ const { userVerification } = require("../Middlewares/AuthMiddleware");
 
 const router = require("express").Router();
 
-// allholdings
+// user allholdings
 router.get("/allhodings", userVerification, getHoldings);
 
 // watchlist
@@ -15,12 +15,12 @@ router.get("/getwatchlist", userVerification, getWatchlist);
 router.post("/addwatchlist", userVerification, addToWatchlist);
 router.delete("/delwatchlist:stockSymbol", userVerification, removeFromWatchlist);
 
-// orders
+// user orders
 router.post("/buy", userVerification, buyStock);
 router.post("/sell", userVerification, sellStock);
 router.get("/allorders", userVerification, getUserOrders);
 
-// wallet
+// user wallet
 router.get("/getwallet", userVerification, getWallet);
 
 module.exports = router;
