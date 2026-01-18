@@ -7,7 +7,6 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const authRoute = require("./Routes/AuthRoute");
 const allRoute = require("./Routes/AllRoute");
-const { WatchListModel } = require("./model/WatchListModel");
 const { StockModel } = require("./model/StockModel");
 const startPriceEngine = require("./engine/mockPriceGenerator")
 
@@ -16,21 +15,18 @@ const URI = process.env.MONGO_URL;
 
 const app = express();
 
-app.use(bodyParser.json());
-
-app.use(
-  cors({
-    origin: ["http://localhost:3000"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
-
-startPriceEngine();
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 
 app.use(cookieParser());
 app.use(express.json());
-app.use("/", authRoute);
+
+
+startPriceEngine();
+
+app.use("/auth", authRoute);
 app.use("/api", allRoute);
 
 app.get("/allstocks", async (req, res) => {
@@ -38,9 +34,10 @@ app.get("/allstocks", async (req, res) => {
   res.json(data)
 })
 
-app.listen(PORT, (req, res) => {
-  console.log("App Started!")
-  mongoose.connect(URI)
-  .then(() => console.log("MongoDB connected"))
-  .catch(err => console.error("Mongo error:", err));
-})
+mongoose.connect(URI)
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log("Server running, DB connected");
+    });
+  })
+  .catch(err => console.error(err));
