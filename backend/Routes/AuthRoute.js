@@ -4,7 +4,12 @@ const router = require("express").Router();
 const express = require("express");
 
 
-router.get('/verify', userVerification);
+router.get('/verify', userVerification, (req, res) => {
+    res.json({
+        user: req.user,
+        status: true
+    })
+});
 router.post("/signup", Signup);
 router.post('/login', Login);
 router.post('/logout', Logout)

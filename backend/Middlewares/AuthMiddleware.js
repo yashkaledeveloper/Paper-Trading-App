@@ -20,12 +20,8 @@ module.exports.userVerification = async (req, res, next) => {
     
     req.user = user; 
 
-    const data = {
-      user: user,
-      status: true
-    }
-    res.json(data)
-
+    req.user = user;
+    // res.json(data)
     next();
 
   } catch (err) {

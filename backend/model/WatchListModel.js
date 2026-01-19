@@ -8,7 +8,11 @@ const watchlistSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-
+    stockId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Stock",
+      require: true
+    },
     stockSymbol: {
       type: String,
       required: true,

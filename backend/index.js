@@ -22,6 +22,8 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json());
 
+// startPriceEngine();
+
 app.use(cors({
   origin: "http://localhost:5173",
   methods: ["GET", "POST", "PUT", "DELETE"],
@@ -33,7 +35,6 @@ app.use(cors({
 app.use("/auth", authRoute);
 app.use("/api", allRoute);
 
-// startPriceEngine();
 
 mongoose.connect(URI)
   .then(() => {

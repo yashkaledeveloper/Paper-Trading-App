@@ -4,11 +4,12 @@ const { getWatchlist, addToWatchlist, removeFromWatchlist } = require("../Contro
 const { getHoldings } = require("../Controllers/HoldingController")
 
 const { userVerification } = require("../Middlewares/AuthMiddleware");
+const { StockModel } = require("../model/StockModel");
 
 const router = require("express").Router();
 
 // allstocks
-app.get("/allstocks", async (req, res) => {
+router.get("/allstocks", async (req, res) => {
     let data = await StockModel.find({});
     res.json(data)
 })

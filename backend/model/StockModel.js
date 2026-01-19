@@ -39,7 +39,10 @@ const stockSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
-
+    isFavourite: {
+      type: Boolean,
+      default: false
+    }
   },
   { timestamps: true }
 );

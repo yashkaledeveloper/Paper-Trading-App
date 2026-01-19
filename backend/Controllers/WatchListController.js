@@ -1,8 +1,9 @@
+const { StockModel } = require("../model/StockModel");
 const { WatchListModel } = require("../model/WatchListModel");
 
 exports.getWatchlist = async (req, res) => {
   try {
-    const list = await WatchListModel.find({ userId: req.user.id });
+    const list = await WatchListModel.find({ userId: req.user.id }).populate("stockId");
 
     res.status(200).json(list);
   } catch (err) {
@@ -12,12 +13,14 @@ exports.getWatchlist = async (req, res) => {
 
 exports.addToWatchlist = async (req, res) => {
   try {
-    const { stockSymbol } = req.body;
+    const { id, symbol, fav, } = req.body;
+
     const user = req.user.id;
+
 
     const stockExist = await WatchListModel.findOne({
       userId: user,
-      stockSymbol,
+      symbol,
     });
 
     if (stockExist) {
@@ -26,9 +29,12 @@ exports.addToWatchlist = async (req, res) => {
       });
     }
 
+    await StockModel.findOneAndUpdate({ _id: id }, { $set: { isFavourite: true} }, { new: true });
+
     const item = await WatchListModel.create({
       userId: user,
-      stockSymbol,
+      stockId: id,
+      stockSymbol: symbol,
     });
 
     return res.status(201).json({
