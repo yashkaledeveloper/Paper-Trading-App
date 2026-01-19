@@ -7,6 +7,12 @@ const { userVerification } = require("../Middlewares/AuthMiddleware");
 
 const router = require("express").Router();
 
+// allstocks
+app.get("/allstocks", async (req, res) => {
+    let data = await StockModel.find({});
+    res.json(data)
+})
+
 // user allholdings
 router.get("/allhodings", userVerification, getHoldings);
 

@@ -10,29 +10,30 @@ const allRoute = require("./Routes/AllRoute");
 const { StockModel } = require("./model/StockModel");
 const startPriceEngine = require("./engine/mockPriceGenerator")
 
+
 const PORT = process.env.PORT || 4000;
 const URI = process.env.MONGO_URL;
 
 const app = express();
 
-app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true
-}));
+
+
 
 app.use(cookieParser());
 app.use(express.json());
 
+app.use(cors({
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
-startPriceEngine();
+
 
 app.use("/auth", authRoute);
 app.use("/api", allRoute);
 
-app.get("/allstocks", async (req, res) => {
-  let data = await StockModel.find({});
-  res.json(data)
-})
+// startPriceEngine();
 
 mongoose.connect(URI)
   .then(() => {
