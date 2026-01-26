@@ -29,7 +29,7 @@ exports.addToWatchlist = async (req, res) => {
       });
     }
 
-    await StockModel.findOneAndUpdate({ _id: id }, { $set: { isFavourite: true} }, { new: true });
+    // await StockModel.findOneAndUpdate({ _id: id }, { $set: { isFavourite: true} }, { new: true });
 
     const item = await WatchListModel.create({
       userId: user,

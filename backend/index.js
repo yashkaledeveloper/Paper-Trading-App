@@ -16,9 +16,6 @@ const URI = process.env.MONGO_URL;
 
 const app = express();
 
-
-
-
 app.use(cookieParser());
 app.use(express.json());
 
