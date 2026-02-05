@@ -1,6 +1,5 @@
 export const stocks = [
     {
-        _id: "6964d854f43c73cffbee35d0",
         symbol: "RELIANCE",
         name: "Reliance Industries",
         exchange: "BSE",
@@ -16,7 +15,6 @@ export const stocks = [
         lastPrice: 93.39
     },
     {
-        _id: "6964d854f43c73cffbee35d1",
         symbol: "TCS",
         name: "Tata Consultancy Services",
         exchange: "BSE",
@@ -32,7 +30,6 @@ export const stocks = [
         lastPrice: 100.38
     },
     {
-        _id: "6964d854f43c73cffbee35d2",
         symbol: "INFY",
         name: "Infosys",
         exchange: "BSE",
@@ -48,7 +45,6 @@ export const stocks = [
         lastPrice: 65.35
     },
     {
-        _id: "6964d854f43c73cffbee35d3",
         symbol: "HDFCBANK",
         name: "HDFC Bank",
         exchange: "BSE",
@@ -63,7 +59,6 @@ export const stocks = [
         dayLow: 97.53,
         lastPrice: 136.81
     }, {
-        _id: "6964d854f43c73cffbee35d4",
         symbol: "ICICIBANK",
         name: "ICICI Bank",
         exchange: "BSE",
@@ -78,7 +73,6 @@ export const stocks = [
         dayLow: 64.59,
         lastPrice: 90.92
     }, {
-        _id: "6964d854f43c73cffbee35d5",
         symbol: "SBIN",
         name: "State Bank of India",
         exchange: "BSE",

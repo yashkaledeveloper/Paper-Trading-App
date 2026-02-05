@@ -12,6 +12,7 @@ const startPriceEngine = require("./engine/mockPriceGenerator")
 
 
 const PORT = process.env.PORT || 4000;
+// const URI = 'mongodb://127.0.0.1:27017/zerodha';
 const URI = process.env.MONGO_URL;
 
 const app = express();
@@ -19,7 +20,8 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json());
 
-// startPriceEngine();
+startPriceEngine();
+
 
 app.use(cors({
   origin: "http://localhost:5173",

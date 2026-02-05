@@ -53,6 +53,7 @@ exports.buyStock = async (req, res) => {
       message: "Buy order executed",
       order,
     });
+    
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
