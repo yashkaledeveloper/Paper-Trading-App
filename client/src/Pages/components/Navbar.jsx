@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { data } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import Flash from './flash';
+import Flash from './Flash';
 
 const Navbar = () => {
    const apiUrl = import.meta.env.VITE_API_URL;
