@@ -1,0 +1,86 @@
+.popup {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(199, 198, 198, 0.348);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  text-align: center;
+}
+
+.popup form {
+  padding: 30px;
+  background-color: ghostwhite;
+  border-radius: 10px;
+}
+
+.popup form .icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  font-size: 22px;
+  font-weight: bold;
+  background-color: #2563eb;
+  color: white;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.popup form .qty input, .price input{
+  width: 150px;
+  padding: 10px;
+  margin-top: 5px;
+  border: none;
+  outline: 1px solid #2563eb;
+  border-radius: 5px;
+}
+
+.popup form .qty p, .price p {
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.popup form .total {
+  margin: 10px auto;
+}
+.popup form .total .t {
+  color: #2563eb;
+  font-weight: bold;
+  font-size: 28px;
+}
+
+.popup form .total p {
+  font-size: 14px;
+}
+
+.popup form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #2563eb;
+  border: 2px solid #2563eb;
+  margin-top: 20px;
+  color: white;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close {
+  margin-top: 20px;
+  background-color: white;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #2563eb;
+  height: 40px;
+  cursor: pointer;
+}

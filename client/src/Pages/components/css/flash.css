@@ -1,0 +1,8 @@
+.flash {
+    width: 100%;
+    background-color: #b7ffd2b3;
+    color: #16a34a;
+    text-align: center;
+    padding: 5px;
+    position: relative;
+}

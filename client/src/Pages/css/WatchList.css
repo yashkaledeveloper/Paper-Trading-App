@@ -1,0 +1,128 @@
+.market-table {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #eef2f7;
+  font-family: system-ui, sans-serif;
+  overflow: hidden;
+  margin-top: 20px;
+  /* padding: 20px; */
+}
+
+.table-header,
+.table-row {
+  display: grid;
+  grid-template-columns: 3fr 1.5fr 2fr 1.5fr 2fr;
+  align-items: center;
+  padding: 16px 20px;
+}
+
+.table-header {
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: #9ca3af;
+  text-transform: uppercase;
+  background: #f9fafb;
+}
+
+.table-row {
+  border-top: 1px solid #f1f5f9;
+}
+
+.table-row:nth-child(odd) {
+  background-color: #e4efff4b;
+}
+
+.asset {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logos {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #eef2ff;
+  color: #4338ca;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.asset p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.price,
+.market-cap {
+  font-weight: 500;
+  color: #111827;
+}
+
+.performance {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  /* border-radius: 999px; */
+  font-size: 14px;
+  width: fit-content;
+}
+
+.performance.positive {
+  /* background: #ecfdf5; */
+  color: #16a34a;
+}
+
+.performance.negative {
+  /* background: #fef2f2; */
+  color: #dc2626;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.actions button {
+  padding: 8px 14px;
+  border-radius: 7px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.buy {
+  background-color: #fff;
+  color: #16a34a;
+  border: 1px solid #16a34a;
+}
+.buy:hover {
+  background: #16a34a;
+  color: white;
+}
+
+.sell {
+  background-color: white;
+  color: #ef4444;
+  border: 1px solid #ef4444;
+}
+.sell:hover {
+  background: #ef4444;
+  color: white;
+}
+
+.bar {
+  border: 1px solid rgba(128, 128, 128, 0.988);
+  padding: 4px 14px;
+  border-radius: 7px;
+}
+
+.more {
+  color: #9ca3af;
+  cursor: pointer;
+}
