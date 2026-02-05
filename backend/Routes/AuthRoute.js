@@ -4,7 +4,7 @@ const router = require("express").Router();
 const express = require("express");
 
 
-router.get('/verify', userVerification, (req, res) => {
+router.post('/verify', userVerification, (req, res) => {
     res.json({
         user: req.user,
         status: true
