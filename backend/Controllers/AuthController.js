@@ -7,8 +7,8 @@ const { WalletModel } = require("../model/WalletModel");
 module.exports.Logout = async (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
-    sameSite: "lax",
-    secure: false,
+    sameSite: "none",
+    secure: true,
     path: "/"
   });
 
@@ -42,8 +42,8 @@ module.exports.Signup = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      sameSite: "lax",
-      secure: false, // true only in HTTPS
+      sameSite: "none",
+      secure: true, // true only in HTTPS
     });
 
 
@@ -83,8 +83,8 @@ module.exports.Login = async (req, res, next) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      sameSite: "lax",
-      secure: false, // true only in HTTPS
+      sameSite: "none",
+      secure: true, // true only in HTTPS
     });
 
 
