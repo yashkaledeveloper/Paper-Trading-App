@@ -22,9 +22,13 @@ app.use(express.json());
 
 startPriceEngine();
 
+const allowedOrigins = [
+  "https://paper-trading-app-client.onrender.com",
+  "http://localhost:5173"
+]
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: allowedOrigins,
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
