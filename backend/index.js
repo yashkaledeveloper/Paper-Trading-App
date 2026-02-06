@@ -17,17 +17,17 @@ const URI = process.env.MONGO_URL;
 
 const app = express();
 
-app.set("trust proxy", 1);
+// app.set("trust proxy", 1);
 
 startPriceEngine();
 
-const allowedOrigins = [
-  "https://paper-trading-app-client.onrender.com",
-  "http://localhost:5173"
-]
+// const allowedOrigins = [
+//   "https://paper-trading-app-client.onrender.com",
+//   "http://localhost:5173"
+// ]
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: "https://paper-trading-app-client.onrender.com",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
