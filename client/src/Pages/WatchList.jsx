@@ -66,29 +66,29 @@ import SellPopup from './components/SellPopup'
 // ];
 
 const WatchList = () => {
-   const apiUrl = import.meta.env.VITE_API_URL;
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [stocks, setStocks] = useState(null);
   const [wallet, setWallet] = useState(null);
   const [buypopup, setBuyPopup] = useState(null);
   const [sellpopup, setSellPopup] = useState(null);
-  
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const watchlist  = await axios.get(`${apiUrl}/api/getwatchlist`, { withCredentials: true });
-          setStocks(watchlist.data)
-          const wallet = await axios.get(`${apiUrl}/api/getwallet`, {withCredentials: true});
-          setWallet(wallet.data);
-        } catch(err) {
-          setStocks(null)
-        }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const watchlist = await axios.get(`${apiUrl}/api/getwatchlist`, { withCredentials: true });
+        setStocks(watchlist.data)
+        const wallet = await axios.get(`${apiUrl}/api/getwallet`, { withCredentials: true });
+        setWallet(wallet.data);
+      } catch (err) {
+        setStocks(null)
       }
-      // setInterval(() => {
-      fetchData()
-      // }, 5000);
-    }, [])
-  
-    if (!stocks) return null
+    }
+    // setInterval(() => {
+    fetchData()
+    // }, 5000);
+  }, [])
+
+  if (!stocks) return null
 
 
   return (
@@ -134,7 +134,7 @@ const WatchList = () => {
         <div className="table-header">
           <span>Asset</span>
           <span>Current Price</span>
-          <span>24H Performance</span>
+          <span>Day High / Day Low</span>
           <span>Market Cap</span>
           <span></span>
         </div>
@@ -154,13 +154,14 @@ const WatchList = () => {
             <div className="price">{stock.stockId.lastPrice}</div>
 
             <div
-              className={`performance ${stock.stockId.isActive ? "positive" : "negative"
-                }`}
+              className={`performance`}
             >
-              <span className="material-symbols-outlined">
+              {/* <span className="material-symbols-outlined">
                 {stock.stockId.isActive ? "trending_up" : "trending_down"}
-              </span>
-              {stock.stockId.dayHigh} / {stock.stockId.dayLow}
+              </span> */}
+              <span class="material-symbols-outlined">arrow_upward_alt</span><span>{stock.stockId.dayHigh}</span> 
+              <span class="material-symbols-outlined">arrow_downward_alt</span><span>{stock.stockId.dayLow}</span>
+              
             </div>
 
             <div className="market-cap">{stock.stockId.sector}</div>
@@ -183,8 +184,8 @@ const WatchList = () => {
         ))}
       </div>
 
-      {buypopup && <BuyPopup stock={buypopup} onClose={() => setBuyPopup(null)} color={'#16a34a'}/>}
-      {sellpopup && <SellPopup stock={sellpopup} onClose={() => setSellPopup(null)} color={'#dc2626'}/>}
+      {buypopup && <BuyPopup stock={buypopup} onClose={() => setBuyPopup(null)} color={'#16a34a'} />}
+      {sellpopup && <SellPopup stock={sellpopup} onClose={() => setSellPopup(null)} color={'#dc2626'} />}
     </>
   );
 }

@@ -29,7 +29,7 @@ export default function StockCard({
             <div className="card-header">
                 <div className="stock-info">
                     <div className="stock-logo">
-                        {symbol.slice(0, 2)}
+                        {symbol.slice(0, 1)}
                     </div>
 
                     <div>
