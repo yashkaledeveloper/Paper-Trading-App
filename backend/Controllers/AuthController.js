@@ -12,7 +12,7 @@ module.exports.Logout = async (req, res) => {
     path: "/"
   });
 
-  res.json({ message: "Logged out" });
+  res.status(200).json({ message: "Logged out" });
 }
 
 module.exports.Signup = async (req, res) => {
@@ -44,6 +44,7 @@ module.exports.Signup = async (req, res) => {
       httpOnly: true,
       sameSite: "none",
       secure: true, // true only in HTTPS
+      path: "/",
       maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
@@ -85,6 +86,7 @@ module.exports.Login = async (req, res, next) => {
     res.cookie("token", token, {
       httpOnly: true,
       sameSite: "none",
+      path: "/",
       secure: true, // true only in 
       maxAge: 7 * 24 * 60 * 60 * 1000
     });

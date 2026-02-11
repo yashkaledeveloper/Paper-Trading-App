@@ -7,7 +7,7 @@ exports.buyStock = async (req, res) => {
   try {
     const { stockSymbol, quantity, price } = req.body;
     const userId = req.user.id;
-
+    
     // 1. Wallet check
     const wallet = await WalletModel.findOne({userId});
     
@@ -35,6 +35,7 @@ exports.buyStock = async (req, res) => {
     let holding = await HoldingModel.findOne({ userId, stockSymbol });
 
     if (holding) {
+      
       const newQty = holding.quantity + quantity;
       const newAvg = (holding.quantity * holding.avgBuyPrice + quantity * price) / newQty;
       holding.quantity = newQty;
@@ -95,7 +96,7 @@ exports.sellStock = async (req, res) => {
     } else {
       await holding.save();
     }
-
+    
     res.status(201).json({
       message: "Sell order executed",
       order,

@@ -1,6 +1,6 @@
 const { getWallet } = require("../Controllers/WalletController");
 const { buyStock, sellStock, getUserOrders } = require("../Controllers/OrdersController");
-const { getWatchlist, addToWatchlist, removeFromWatchlist } = require("../Controllers/WatchListController");
+const { getWatchlist, addToWatchlist, removeFromWatchlist, currentPrice } = require("../Controllers/WatchListController");
 const { getHoldings } = require("../Controllers/HoldingController")
 
 const { userVerification } = require("../Middlewares/AuthMiddleware");
@@ -13,6 +13,8 @@ router.get("/allstocks", async (req, res) => {
     let data = await StockModel.find({});
     res.json(data)
 })
+
+router.post("/realprice", userVerification, currentPrice)
 
 // user allholdings
 router.get("/allhodings", userVerification, getHoldings);

@@ -64,3 +64,14 @@ exports.removeFromWatchlist = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+
+exports.currentPrice = async (req, res) => {
+  try {
+    const { symbol } = req.body;
+    const data = await StockModel.find({symbol: {$in: symbol}})
+    res.status(200).json(data)
+  } catch(err) {
+    console.log(err);
+  }
+}

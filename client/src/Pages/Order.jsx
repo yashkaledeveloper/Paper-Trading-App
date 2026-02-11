@@ -63,7 +63,7 @@ const Order = () => {
         </div>
 
         {/* Tabs */}
-        <div className="tabs">
+        {/* <div className="tabs">
           {tabs.map((tab) => (
             <button
               key={tab}
@@ -73,7 +73,7 @@ const Order = () => {
               {tab}
             </button>
           ))}
-        </div>
+        </div> */}
       </div>
 
       {/* -------------------------- */}
@@ -96,6 +96,9 @@ const Order = () => {
               <div className="logos">{stock.stockSymbol[0]}</div>
               <div>
                 <strong>{stock.stockSymbol}</strong>
+                <p>
+                  {stock.stockSymbol} Incorporation.
+                </p>
               </div>
             </div>
 
@@ -110,6 +113,7 @@ const Order = () => {
             <div className="status">{stock.status}</div>
 
             <div className="datetime">{formatDate(stock.updatedAt)}</div>
+
           </div>
         ))}
       </div>

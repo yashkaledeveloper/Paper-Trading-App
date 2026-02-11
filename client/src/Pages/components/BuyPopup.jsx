@@ -3,7 +3,9 @@ import './css/Popup.css'
 import axios from 'axios';
 
 const BuyPopup = ({ stock, onClose, color }) => {
+
    const apiUrl = import.meta.env.VITE_API_URL;
+
   const [totalPrice, setTotalPrice] = useState(stock.lastPrice);
   const [order, setOrder] = useState({
     stockSymbol: stock.symbol,
@@ -11,7 +13,8 @@ const BuyPopup = ({ stock, onClose, color }) => {
     price: stock.lastPrice
   })
 
-  const handleQty = (qty) => {
+  const handleQty = (quantity) => {
+    const qty = Number(quantity);
     setOrder({
       stockSymbol: stock.symbol,
       quantity: qty,

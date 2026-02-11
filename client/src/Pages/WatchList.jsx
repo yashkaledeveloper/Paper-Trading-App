@@ -67,6 +67,7 @@ import SellPopup from './components/SellPopup'
 
 const WatchList = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
+
   const [stocks, setStocks] = useState(null);
   const [wallet, setWallet] = useState(null);
   const [buypopup, setBuyPopup] = useState(null);
@@ -83,9 +84,11 @@ const WatchList = () => {
         setStocks(null)
       }
     }
-    // setInterval(() => {
+
     fetchData()
-    // }, 5000);
+    setInterval(() => {
+      fetchData()
+    }, 5000);
   }, [])
 
   if (!stocks) return null
@@ -159,9 +162,9 @@ const WatchList = () => {
               {/* <span className="material-symbols-outlined">
                 {stock.stockId.isActive ? "trending_up" : "trending_down"}
               </span> */}
-              <span class="material-symbols-outlined">arrow_upward_alt</span><span>{stock.stockId.dayHigh}</span> 
+              <span class="material-symbols-outlined">arrow_upward_alt</span><span>{stock.stockId.dayHigh}</span>
               <span class="material-symbols-outlined">arrow_downward_alt</span><span>{stock.stockId.dayLow}</span>
-              
+
             </div>
 
             <div className="market-cap">{stock.stockId.sector}</div>

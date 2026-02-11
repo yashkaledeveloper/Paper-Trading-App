@@ -93,3 +93,13 @@
   color: white;
   cursor: pointer;
 }
+
+.quick-buy {
+  padding: 8px 14px;
+  border-radius: 7px;
+  font-size: 13px;
+  cursor: pointer;
+  background-color: #fff;
+  color: #2563eb;
+  border: 1px solid #2563eb;
+}

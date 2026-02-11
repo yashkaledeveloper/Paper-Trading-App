@@ -1,7 +1,7 @@
 .h-table-header,
 .h-table-row {
   display: grid;
-  grid-template-columns: 3fr 1.5fr 1.5fr 1.5fr 1.5fr 1.5fr;
+  grid-template-columns: 3fr 1.5fr 1.5fr 1.5fr 1.5fr 1.5fr 1.5fr 0.5fr;
   align-items: center;
   padding: 16px 20px;
   font-size: 15px;
@@ -21,4 +21,20 @@
 
 .h-table-row:nth-child(odd) {
   background-color: #e4efff4b;
+}
+
+.h-table-row .status {
+  width: fit-content;
+  padding: 5px 8px;
+  width: 70px;
+  text-align: center;
+}
+
+.red {
+  background-color: rgba(252, 202, 202, 0.271);
+  color: red;
+}
+.green {
+  background-color: rgba(202, 252, 227, 0.642);
+  color: green;
 }

@@ -210,7 +210,7 @@ const Search = () => {
             company={stock.name}
             sector={stock.sector}
             exchange={stock.exchange}
-            price={stock.dayHigh}
+            price={stock.lastPrice}
             change={stock.change}
             isPositive={stock.isActive}
           />

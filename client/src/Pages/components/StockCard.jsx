@@ -13,7 +13,7 @@ export default function StockCard({
     change,
     isPositive
 }) {
-     const apiUrl = import.meta.env.VITE_API_URL;  
+    const apiUrl = import.meta.env.VITE_API_URL;
     const [input, setInput] = useState(null);
 
     const addToWatchList = async (id, fav) => {
@@ -56,13 +56,14 @@ export default function StockCard({
                     </p>
                 </div>
 
-                {(!fav) ? <button className="add-btn" onClick={() => addToWatchList(id, fav)}>
-                    <span class="material-symbols-outlined">
-                        add
-                    </span>
-                </button> : <button className="add-btn" style={{background: '#fff', color: 'blue', border: '1px solid blue'}}><span class="material-symbols-outlined">
-                    check
-                </span></button>}
+                <div style={{display:'flex', gap: '10px'}}>
+                    <button className="quick-buy"><span>BUY</span></button>
+                    <button className="add-btn" onClick={() => addToWatchList(id, fav)}>
+                        <span class="material-symbols-outlined">
+                            add
+                        </span>
+                    </button>
+                </div>
             </div>
         </div>
     );
