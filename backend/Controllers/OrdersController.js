@@ -72,7 +72,7 @@ exports.sellStock = async (req, res) => {
     if (!holding || holding.quantity < quantity) {
       return res.status(400).json({ message: "Not enough stock to sell" });
     }
-
+    
     // 2. Create order
     const order = await OrdersModel.create({
       userId,

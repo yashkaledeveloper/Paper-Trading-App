@@ -4,9 +4,10 @@ import axios from 'axios';
 
 const BuyPopup = ({ stock, onClose, color }) => {
 
-   const apiUrl = import.meta.env.VITE_API_URL;
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const [totalPrice, setTotalPrice] = useState(stock.lastPrice);
+
   const [order, setOrder] = useState({
     stockSymbol: stock.symbol,
     quantity: 1,
