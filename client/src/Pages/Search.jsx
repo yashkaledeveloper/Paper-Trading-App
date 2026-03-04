@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import StockCard from './components/StockCard'
 import "./css/Search.css"
 // import { stocks } from "./components/data"
-import axios from 'axios'
+import axios, { all } from 'axios'
+import { toast } from 'react-toastify';
 
 // export const stock = [
 //   {
@@ -150,30 +151,96 @@ import axios from 'axios'
 //     isPositive: false
 //   }
 // ];
+const apiUrl = import.meta.env.VITE_API_URL;
+
 
 const Search = () => {
-   const apiUrl = import.meta.env.VITE_API_URL;
 
   const [stocks, setStocks] = useState(null);
+  const [allStocks, setAllStocks] = useState(null);
+  const [searching, setSearching] = useState(false);
 
+  // 🔁 polling
   useEffect(() => {
+    if (searching) return;
+
     const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${apiUrl}/api/allstocks`, { withCredentials: true });
+      const { data } = await axios.get(
+        `${apiUrl}/api/allstocks`,
+        { withCredentials: true }
+      );
+      setStocks(data);
+      setAllStocks(data);
+    };
 
-        setStocks(data)
-      } catch (err) {
-        setStocks(null)
-      }
-    }
+    fetchData();
+    const interval = setInterval(fetchData, 5000);
     
-    fetchData()
-    setInterval(() => {
-      fetchData()
-    }, 5000);
-  }, [])
+    return () => clearInterval(interval);
+  }, [searching]);
 
-  if (!stocks) return null
+  // 🔍 search
+  const handleSearch = async (name) => {
+    // polling band
+    const { data } = await axios.post(
+      `${apiUrl}/api/search`,
+      { name },
+      { withCredentials: true }
+    );
+
+    if (Boolean(data.length)) {
+      setSearching(true);
+      setStocks(data)
+    } else {
+      toast.warning('Stock Not Available')
+      setStocks(allStocks)
+    }
+
+
+  };
+
+  if (!stocks) return null;
+
+  // const [stocks, setStocks] = useState(null);
+  // const [value, setValue] = useState([]);
+
+  // const fetchData = async () => {
+  //   try {
+  //     const { data } = await axios.get(`${apiUrl}/api/allstocks`, { withCredentials: true });
+  //     setStocks(data)
+  //   } catch (err) {
+  //     setStocks(null)
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   fetchData()
+
+  //   const interval = setInterval(() => {
+  //     fetchData()
+  //   }, 5000);
+
+  //   // console.log(!(Object.keys(value).length === 0));
+
+  //   if (!(Object.keys(value).length === 0)) {
+  //     clearInterval(interval); // 👈 direct call
+  //     setStocks(value)
+  //   }
+
+  //   return () => {
+  //     clearInterval(interval); // 👈 cleanup on unmount / dependency change
+  //   };
+
+  // }, [value])
+
+
+
+  // const handleSearch = async (e) => {
+  //   const { data } = await axios.post(`${apiUrl}/api/search`, { name: e }, { withCredentials: true });
+  //   setValue(data)
+  // };
+
+  // if (!stocks) return null
 
 
   return (
@@ -190,6 +257,11 @@ const Search = () => {
           <input
             type="text"
             placeholder="Search by company name or ticker symbol (e.g. AAPL, Tesla)"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSearch(e.target.value)
+              }
+            }}
           />
 
           <div className="tags">

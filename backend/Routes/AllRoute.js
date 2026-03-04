@@ -25,6 +25,20 @@ router.post("/realprice", userVerification, currentPrice)
 // user allholdings
 router.get("/allhodings", userVerification, getHoldings);
 
+router.post("/search", async (req, res) => {
+  const { name } = req.body;
+
+  if (!name || !name.trim()) {
+    return res.json([]);
+  }
+
+  const stocks = await StockModel.find({
+    name: { $regex: name, $options: "i" }
+  }).limit(10);
+
+  res.json(stocks);
+});
+
 // watchlist
 router.get("/getwatchlist", userVerification, getWatchlist);
 router.post("/addwatchlist", userVerification, addToWatchlist);
