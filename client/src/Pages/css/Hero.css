@@ -1,0 +1,39 @@
+.congrats {
+  position: fixed;
+  top: 0%;
+  background-color: white;
+  left: 0%;
+  width: 100%;
+}
+.congrats .center {
+  height: 100vh;
+  z-index: 10;
+}
+.congrats .lottie {
+  position: fixed;
+  top: 0%;
+  width: 100%;
+  z-index: 50;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(3);
+    opacity: 1;
+  }
+}
+
+.zoom-in {
+  animation: zoomIn 1s ease-in forwards;
+  padding: 10px 20px; 
+  border-radius: 50%;
+  text-align: center;
+}
+.zoom-in h1 {
+  font-size: 50px;
+  color: #2f74dc;
+}

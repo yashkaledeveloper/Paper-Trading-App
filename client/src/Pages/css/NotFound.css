@@ -1,0 +1,41 @@
+.container {
+  height: 100%;
+  width: 100%;
+  background-color: #2f74dc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Inter, system-ui, sans-serif;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+}
+
+.center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.code {
+  font-size: 160px;
+  font-weight: 300;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 4px;
+}
+
+.link {
+  position: absolute;
+  bottom: 24px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+}
+
+.underline {
+  text-decoration: underline;
+  color: #ffffff;
+}

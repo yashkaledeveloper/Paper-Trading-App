@@ -1,0 +1,66 @@
+.search-market {
+  text-align: center;
+  padding: 40px 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.search-market h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.search-market p {
+  margin: 6px 0 24px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.search-box {
+  max-width: 620px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 16px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.search-icon {
+  color: #9ca3af;
+  font-size: 22px;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.search-box input::placeholder {
+  color: #9ca3af;
+}
+
+.tags {
+  display: flex;
+  gap: 6px;
+}
+
+.tags span {
+  padding: 4px 8px;
+  font-size: 11px;
+  border-radius: 6px;
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+
+.card-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 20px;
+}

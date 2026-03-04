@@ -1,0 +1,10 @@
+.main {
+    display: flex;
+}
+.mainBar {
+    width: 100%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    height: 91vh;
+    padding: 40px;
+}
